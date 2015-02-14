@@ -30,7 +30,7 @@ var Leaders = {
 
     reset: function () {
         this.leaders = [
-            new Leader(LeaderIds.NETHERLANDS,              'King',                 'Wimmie'),
+            new Leader(LeaderIds.NETHERLANDS,              'King',                 'Willie'),
             new Leader(LeaderIds.UNITED_STATES_AMERICA,    'President',            'Obama'),
             new Leader(LeaderIds.ENGLAND,                  'Queen',                'Elizabeth II'),
             new Leader(LeaderIds.NORTH_KOREA,              'Supreme Leader',       'Jong-un'),
