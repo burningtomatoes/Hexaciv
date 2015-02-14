@@ -7,21 +7,29 @@ var LandType = {
 var World = {
     hexes: [],
     hexCount: 0,
+
     hexSize: {
         HEIGHT: 50,
         WIDTH: 65,
         SIDE: 35
     },
+
     idGenLetters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
 
-    generate: function (width, height) {
+    widthPx: 0,
+    heightPx: 0,
+
+    generate: function (widthPx, heightPx) {
         this.hexes = [];
         this.hexCount = 0;
+
+        this.widthPx = widthPx;
+        this.heightPx = heightPx;
 
         var row = 0;
         var y = 0.0;
 
-        while (y + this.hexSize.HEIGHT <= height) {
+        while (y + this.hexSize.HEIGHT <= heightPx) {
             var col = 0;
             var offset = 0.0;
 
@@ -32,7 +40,7 @@ var World = {
 
             var x = offset;
 
-            while (x + this.hexSize.WIDTH <= width) {
+            while (x + this.hexSize.WIDTH <= widthPx) {
                 var hex = new Hex(this.generateHexId(row, col), x, y);
                 console.log('Created Hex ' + hex.id + ' at ' + hex.x + ',' + hex.y, hex);
                 this.hexes.push(hex);
@@ -46,6 +54,8 @@ var World = {
             row++;
             y += this.hexSize.HEIGHT / 2;
         }
+
+        Camera.centerToMap();
     },
 
     generateHexId: function (row, col) {
@@ -61,7 +71,7 @@ var World = {
     },
 
     update: function () {
-
+        Camera.update();
     },
 
     draw: function (ctx) {
@@ -70,10 +80,15 @@ var World = {
     },
 
     drawHexes: function (ctx) {
+        ctx.save();
+        ctx.translate(Camera.translateX(0), Camera.translateY(0));
+
         for (var i = 0; i < this.hexCount; i++) {
             var hex = this.hexes[i];
             hex.draw(ctx);
         }
+
+        ctx.restore();
     },
 
     drawFog: function (ctx) {
