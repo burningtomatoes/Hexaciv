@@ -65,9 +65,22 @@ var World = {
     },
 
     draw: function (ctx) {
+        this.drawHexes(ctx);
+        this.drawFog(ctx);
+    },
+
+    drawHexes: function (ctx) {
         for (var i = 0; i < this.hexCount; i++) {
             var hex = this.hexes[i];
             hex.draw(ctx);
         }
+    },
+
+    drawFog: function (ctx) {
+        var grd = ctx.createRadialGradient(Canvas.canvas.width / 2, Canvas.canvas.height / 2, Canvas.canvas.height / 4, Canvas.canvas.width / 2, Canvas.canvas.height / 2, Canvas.canvas.height / 2);
+        grd.addColorStop(0, "rgba(0, 0, 0, 0)");
+        grd.addColorStop(1, "rgba(150, 150, 200, 0.25)");
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, Canvas.canvas.width, Canvas.canvas.height);
     }
 };
