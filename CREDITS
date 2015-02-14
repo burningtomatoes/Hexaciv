@@ -1,0 +1,11 @@
+HEXACIV
+Copyright (c) 2015, Roy de Jong
+
+Game design & development:
+    by Roy de Jong
+    http://www.burningtomato.com
+    License: MIT
+
+Uses the Simple JavaScript Inheritance (Inherit.js) library by John Resig, MIT licensed.
+
+Uses the Chance.js library by Victor Quinn, MIT licensed.
