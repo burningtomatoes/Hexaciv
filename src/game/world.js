@@ -14,8 +14,6 @@ var World = {
         SIDE: 35
     },
 
-    idGenLetters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-
     widthPx: 0,
     heightPx: 0,
 
@@ -44,11 +42,8 @@ var World = {
             var x = offset;
 
             while (x + this.hexSize.WIDTH <= widthPx) {
-                var hex = new Hex(this.generateHexId(row, col), x, y);
-                console.log('Created Hex ' + hex.id + ' at ' + hex.x + ',' + hex.y, hex);
+                var hex = new Hex(this.hexCount++, x, y);
                 this.hexes.push(hex);
-
-                this.hexCount++;
 
                 col += 2;
                 x += this.hexSize.WIDTH + this.hexSize.SIDE;
@@ -59,18 +54,6 @@ var World = {
         }
 
         Camera.centerToMap();
-    },
-
-    generateHexId: function (row, col) {
-        var result = '';
-        var idx = row;
-
-        while (idx > 25) {
-            result = this.idGenLetters[idx] + result;
-            idx -= 26;
-        }
-
-        return this.idGenLetters[idx] + result + (col + 1);
     },
 
     update: function () {
