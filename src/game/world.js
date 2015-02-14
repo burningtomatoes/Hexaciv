@@ -17,6 +17,8 @@ var World = {
     widthPx: 0,
     heightPx: 0,
 
+    leaders: [],
+
     generate: function (width, height) {
         this.hexes = [];
         this.hexCount = 0;
@@ -52,6 +54,9 @@ var World = {
             row++;
             y += this.hexSize.HEIGHT / 2;
         }
+
+        this.leaders = Leaders.selectRandomLeaders(5);
+        Scoreboard.updateUi();
 
         Camera.centerToMap();
     },

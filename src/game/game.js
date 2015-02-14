@@ -17,9 +17,16 @@ var Game = {
         Mouse.init();
         Keyboard.init();
 
-        World.generate(20, 20);
+        Scoreboard.init();
 
         this.started = true;
+
+        this.newGame();
+    },
+
+    newGame: function () {
+        Leaders.reset();
+        World.generate(21, 20);
     },
 
     update: function () {
