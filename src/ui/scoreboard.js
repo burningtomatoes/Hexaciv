@@ -1,27 +1,34 @@
 var Scoreboard = {
-    $elem: null,
+    $stats: null,
+    $scoreboard: null,
 
     init: function () {
-        this.$elem = $('#score');
-        this.$elem.hide();
+        this.$stats = $('#stats');
+
+        this.$scoreboard = $('#score');
+        this.$scoreboard.hide();
 
         window.setInterval(this.updateUi.bind(this), 5000);
     },
 
     updateUi: function () {
-        this.$elem.html('');
+        this.$scoreboard.html('');
 
         for (var i = 0; i < World.leaders.length; i++) {
             var leader = World.leaders[i];
 
             var $leader = $('<div />')
                 .addClass('leader')
+                .addClass(leader.isPlayer ? 'player' : 'ai')
                 .append('<img class="flag" src="assets/images/flag_' + leader.id + '.png" />')
                 .append(leader.title + ' ' + leader.name)
-                .appendTo(this.$elem);
+                .appendTo(this.$scoreboard);
+
+            if (leader.isPlayer) {
+                this.$stats.find('.col.player').html($leader.html());
+            }
         }
 
-
-        this.$elem.show();
+        this.$scoreboard.show();
     }
 };

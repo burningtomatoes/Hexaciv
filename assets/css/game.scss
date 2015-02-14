@@ -68,6 +68,7 @@ canvas {
         margin-top: -2px;
         width: 22px;
         height: 15px;
+        margin-right: 10px;
       }
     }
   }
@@ -90,6 +91,10 @@ canvas {
     padding: 10px;
     font-size: 12px;
     text-shadow: 0 1px 1px #000;
+
+    &.player {
+      color: #64c26f;
+    }
 
     img.flag {
       float: left;
