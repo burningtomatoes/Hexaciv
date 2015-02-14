@@ -21,3 +21,7 @@ canvas {
   image-rendering: pixelated;
   -ms-interpolation-mode: nearest-neighbor;
 }
+
+#game {
+  cursor: none !important;
+}
