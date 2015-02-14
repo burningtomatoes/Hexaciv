@@ -19,9 +19,12 @@ var World = {
     widthPx: 0,
     heightPx: 0,
 
-    generate: function (widthPx, heightPx) {
+    generate: function (width, height) {
         this.hexes = [];
         this.hexCount = 0;
+
+        var widthPx = width * this.hexSize.WIDTH;
+        var heightPx = height * this.hexSize.HEIGHT;
 
         this.widthPx = widthPx;
         this.heightPx = heightPx;

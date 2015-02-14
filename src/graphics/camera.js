@@ -10,6 +10,8 @@ var Camera = {
     rumbleIntensity: 1,
     rumbleDuration: 0,
 
+    cameraSpeed: 10,
+
     translateX: function(x) {
         return Math.round(x + this.applyX + this.rumbleOffset);
     },
@@ -53,6 +55,7 @@ var Camera = {
     },
 
     update: function() {
+        // Rumble effect
         if (this.isRumbling) {
             this.rumbleDuration--;
 
@@ -67,30 +70,10 @@ var Camera = {
             }
         }
 
+        // Entity tracking
         if (this.trackingEntity != null) {
             this.x = Canvas.canvas.width / 2 - this.trackingEntity.posX - this.trackingEntity.width / 2;
             this.y = Canvas.canvas.height / 2 - this.trackingEntity.posY - this.trackingEntity.height / 2;
-
-            var xMargin = 96;
-            var yMargin = 32;
-
-            var minX = -xMargin;
-            if (this.x < minX) {
-                this.x = minX;
-            }
-            var minY = -yMargin;
-            if (this.y < minY) {
-                this.y = minY;
-            }
-            yMargin = 96;
-            var maxY = (Canvas.canvas.height + yMargin) - Canvas.canvas.height;
-            if (this.y > maxY) {
-                this.y = maxY;
-            }
-            var maxX = (Canvas.canvas.width + xMargin) - Canvas.canvas.width;
-            if (this.x > maxX) {
-                this.x = maxX;
-            }
         }
 
         if (this.trackHard) {
@@ -100,6 +83,52 @@ var Camera = {
         } else {
             this.applyX = MathHelper.lerp(this.applyX, this.x, 0.1);
             this.applyY = MathHelper.lerp(this.applyY, this.y, 0.1);
+        }
+
+        // Keyboard camera controls
+        var pressedU = (Keyboard.isKeyDown(KeyCode.UP) || Keyboard.isKeyDown(KeyCode.W));
+        var pressedL = (Keyboard.isKeyDown(KeyCode.LEFT) || Keyboard.isKeyDown(KeyCode.A));
+        var pressedD = (Keyboard.isKeyDown(KeyCode.DOWN) || Keyboard.isKeyDown(KeyCode.S));
+        var pressedR = (Keyboard.isKeyDown(KeyCode.RIGHT) || Keyboard.isKeyDown(KeyCode.D));
+
+        if (pressedU) {
+            this.y += this.cameraSpeed;
+        }
+
+        if (pressedD) {
+            this.y -= this.cameraSpeed;
+        }
+
+        if (pressedL) {
+            this.x += this.cameraSpeed;
+        }
+
+        if (pressedR) {
+            this.x -= this.cameraSpeed;
+        }
+
+        // Restrict camera to world size
+        var xMargin = 0;
+        var yMargin = 0;
+
+        var maxY = 0;
+        if (this.y > maxY) {
+            this.y = maxY;
+        }
+
+        var maxX = 0;
+        if (this.x > maxX) {
+            this.x = maxX;
+        }
+
+        var minX = -(World.widthPx - Canvas.canvas.width);
+        if (this.x < minX) {
+            this.x = minX;
+        }
+
+        var minY = -(World.heightPx - Canvas.canvas.height);
+        if (this.y < minY) {
+            this.y = minY;
         }
     }
 };

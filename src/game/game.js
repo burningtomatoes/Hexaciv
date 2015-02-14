@@ -15,8 +15,9 @@ var Game = {
         this.stages = new StageLoader();
 
         Mouse.init();
+        Keyboard.init();
 
-        World.generate(1000, 500);
+        World.generate(20, 20);
 
         this.started = true;
     },
@@ -26,6 +27,7 @@ var Game = {
             return;
         }
 
+        Keyboard.update();
         World.update();
     },
 
