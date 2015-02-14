@@ -6,6 +6,11 @@ Game design & development:
     http://www.burningtomato.com
     License: MIT
 
+"Pixelmix" font:
+    by Andrew Tyler
+    http://www.dafont.com/pixelmix.font
+    License: CC BY-NC-ND 3.0 US (Attribution, NonCommercial, NoDerivatives)
+
 Uses the Simple JavaScript Inheritance (Inherit.js) library by John Resig, MIT licensed.
 
 Uses the Chance.js library by Victor Quinn, MIT licensed.

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Pixelmix';
+  src: url('../fonts/pixelmix.ttf');
+}
+
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -8,9 +13,13 @@
   overflow: hidden;
 }
 
-body {
+body, html {
   background: #000;
   color: #fff;
+  overflow: hidden;
+  -webkit-font-smoothing: none !important;
+  font-family: 'Pixelmix', monospace;
+  font-weight: normal !important;
 }
 
 canvas {
@@ -24,4 +33,42 @@ canvas {
 
 #game {
   cursor: none !important;
+}
+
+#stats {
+  background: #000;
+  background: linear-gradient(to bottom, #383b40 0%,#000000 100%);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  height: 50px;
+  border-bottom: 2px solid rgba(255, 250, 134, 0.75);
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  text-shadow: 1px 1px 1px #000;
+
+  .l {
+    float: left;
+  }
+  .r {
+    float: right;
+  }
+
+  .col {
+    float: left;
+    margin: 0 10px;
+    line-height: 45px;
+    font-size: 14px;
+
+    img {
+      vertical-align: middle;
+
+      &.flag {
+        margin-top: -2px;
+        width: 22px;
+        height: 15px;
+      }
+    }
+  }
 }
