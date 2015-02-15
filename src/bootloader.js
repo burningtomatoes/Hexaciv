@@ -1,5 +1,7 @@
 $(document).ready(function () {
-    Canvas.init();
     Game.init();
-    Game.start();
+
+    Bootlogo.show(function () {
+        Game.start();
+    });
 });

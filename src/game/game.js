@@ -13,6 +13,8 @@ var Game = {
             return;
         }
 
+        Canvas.init();
+
         this.$element = $('#game');
 
         this.images = new ImageLoader();
