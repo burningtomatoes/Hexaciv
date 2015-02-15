@@ -116,6 +116,11 @@ canvas {
       color: #64c26f;
     }
 
+    &.playing {
+      background: rgba(22, 82, 255, 0.75);
+      margin-top: 0;
+    }
+
     img.flag {
       float: left;
       width: 20px;

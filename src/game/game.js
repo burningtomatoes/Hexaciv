@@ -50,7 +50,7 @@ var Game = {
         var startComplete = function () {
             this.$element.show();
 
-            Scoreboard.updateUi();
+            World.beginRound();
 
             cb();
         }.bind(this);

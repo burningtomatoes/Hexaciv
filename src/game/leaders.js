@@ -2,11 +2,17 @@ var Leader = Class.extend({
     id: null,
     title: null,
     name: null,
+    revealed: false,
 
     init: function (id, title, name) {
         this.id = id;
         this.title = title;
         this.name = name;
+        this.revealed = false;
+    },
+
+    isPlaying: function () {
+        return World.turnLeader === this;
     }
 });
 

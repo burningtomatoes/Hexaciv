@@ -22,6 +22,8 @@ var World = {
     player: null,
 
     round: 0,
+    turn: 0,
+    turnLeader: null,
 
     clear: function () {
         this.hexes = [];
@@ -31,6 +33,8 @@ var World = {
         this.leaders = [];
         this.player = null;
         this.round = 0;
+        this.turn = 0;
+        this.turnLeader = null;
     },
 
     generate: function (width, height) {
@@ -79,7 +83,38 @@ var World = {
     },
 
     beginRound: function () {
+        this.round++;
+        Scoreboard.updateUi();
 
+        Notices.addNotice('Round ' + this.round + ' begins.');
+
+        this.turn = -1;
+        this.beginTurn();
+    },
+
+    beginTurn: function () {
+        this.turn++;
+
+        if (this.turn >= this.leaders.length) {
+            // All leaders did their part, begin a new round instead (which in turn will start a new turn).
+            this.beginRound();
+            return;
+        }
+
+        this.turnLeader = this.leaders[this.turn];
+        this.turnLeader.revealed = true;
+
+        if (this.turnLeader === this.player) {
+            Notices.addNotice('Your turn begins.');
+        } else {
+            Notices.addNotice('Turn begins for ' + this.turnLeader.name + '.');
+        }
+
+        Scoreboard.updateUi();
+    },
+
+    endTurn: function () {
+        this.beginTurn();
     },
 
     update: function () {
