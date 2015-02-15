@@ -11,23 +11,23 @@
     </head>
     <body>
 
-        <div id="stats">
+        <div id="stats" class="hidden">
             <div class="l">
                 <div class="col player">
-                    <img src="assets/images/flag_nl.png" class="flag" /> Wim of Dutchland
+                    <img src="assets/images/flag_nl.png" class="flag" /> <span>%LeaderName%</span>
                 </div>
             </div>
             <div class="r">
-                <div class="col">
-                    Round 1
+                <div class="col round">
+                    <span>%RoundNumber%</span>
                 </div>
             </div>
         </div>
 
-        <div id="score">
+        <div id="score" class="hidden">
         </div>
 
-        <canvas id="game"></canvas>
+        <canvas id="game" class="hidden"></canvas>
 
         <script src="assets/js/jquery-1.11.2.min.js"></script>
         <script src="build/hexaciv.min.js"></script>

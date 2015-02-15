@@ -8,10 +8,18 @@ var Scoreboard = {
         this.$scoreboard = $('#score');
         this.$scoreboard.hide();
 
+        this.$stats.hide();
+
         window.setInterval(this.updateUi.bind(this), 5000);
     },
 
     updateUi: function () {
+        if (!Game.started) {
+            this.$scoreboard.hide();
+            this.$stats.hide();
+            return;
+        }
+
         this.$scoreboard.html('');
 
         for (var i = 0; i < World.leaders.length; i++) {
@@ -30,5 +38,6 @@ var Scoreboard = {
         }
 
         this.$scoreboard.show();
+        this.$stats.show();
     }
 };

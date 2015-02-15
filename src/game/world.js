@@ -21,9 +21,17 @@ var World = {
 
     player: null,
 
-    generate: function (width, height) {
+    clear: function () {
         this.hexes = [];
         this.hexCount = 0;
+        this.widthPx = 0;
+        this.heightPx = 0;
+        this.leaders = [];
+        this.player = null;
+    },
+
+    generate: function (width, height) {
+        this.clear();
 
         var widthPx = width * this.hexSize.WIDTH;
         var heightPx = height * this.hexSize.HEIGHT;
