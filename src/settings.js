@@ -1,3 +1,3 @@
 var Settings = {
-    DebugSkipBootLogo: false
+    DebugSkipBootLogo: true
 };

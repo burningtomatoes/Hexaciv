@@ -21,6 +21,8 @@ var World = {
 
     player: null,
 
+    round: 0,
+
     clear: function () {
         this.hexes = [];
         this.hexCount = 0;
@@ -28,6 +30,7 @@ var World = {
         this.heightPx = 0;
         this.leaders = [];
         this.player = null;
+        this.round = 0;
     },
 
     generate: function (width, height) {
@@ -73,6 +76,10 @@ var World = {
         Scoreboard.updateUi();
 
         Camera.centerToMap();
+    },
+
+    beginRound: function () {
+
     },
 
     update: function () {

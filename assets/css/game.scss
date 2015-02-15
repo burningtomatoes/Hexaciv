@@ -1,6 +1,7 @@
 $zIndexGame: 100;
 $zIndexHud: 200;
 $zIndexOverlays: 300;
+$zIndexSuperlays: 400;
 
 @font-face {
   font-family: 'Pixelmix';
@@ -23,7 +24,6 @@ $zIndexOverlays: 300;
   margin: 0;
   padding: 0;
   border: 0;
-  overflow: hidden;
 }
 
 body, html {
@@ -124,7 +124,15 @@ canvas {
   }
 }
 
-
+#notices {
+  position: fixed;
+  top: 50px;
+  padding: 20px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  font-size: 26px;
+  z-index: $zIndexOverlays;
+}
 
 #burningtomato {
   $height: 435px;
@@ -136,7 +144,7 @@ canvas {
   width: 100%;
   left: 0;
   right: 0;
-  z-index: $zIndexOverlays;
+  z-index: $zIndexSuperlays;
 
   h1 {
     margin-top: 0;
