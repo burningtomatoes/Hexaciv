@@ -7,6 +7,10 @@ $zIndexSuperlays: 400;
   font-family: 'Pixelmix';
   src: url('../fonts/pixelmix.ttf');
 }
+@font-face {
+  font-family: 'FrauHex';
+  src: url('../fonts/frau-hex.ttf');
+}
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -154,5 +158,22 @@ canvas {
   h1 {
     margin-top: 0;
     margin-bottom: 0;
+  }
+}
+
+#mainmenu {
+  text-align: center;
+  padding: 25px;
+
+  h1 {
+    font-family: FrauHex;
+    font-size: 132px;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-size: 6pt * 3;
+    color: #eee;
+    margin: 10px 0;
   }
 }
