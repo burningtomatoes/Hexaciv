@@ -2,6 +2,7 @@ $zIndexGame: 100;
 $zIndexHud: 200;
 $zIndexOverlays: 300;
 $zIndexSuperlays: 400;
+$zIndexSuperDuperlays: 500;
 
 @font-face {
   font-family: 'Pixelmix';
@@ -23,6 +24,8 @@ $zIndexSuperlays: 400;
   user-select: none;
 
   cursor: default;
+
+  font-weight: normal !important;
 }
 * {
   margin: 0;
@@ -174,6 +177,96 @@ canvas {
   h2 {
     font-size: 6pt * 3;
     color: #eee;
-    margin: 10px 0;
+    margin: 10px 0 50px 0;
+  }
+
+  .button {
+    border: 1px solid #b9b9b9;
+    color: #fff;
+    $pad: 15px;
+    padding: ($pad - 2px) $pad $pad $pad;
+    width: 500px;
+    margin: 30px auto;
+    font-size: 32px;
+    background: linear-gradient(to bottom, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 50%,rgba(248,181,0,1) 51%,rgba(251,223,147,1) 100%);
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
+    line-height: 40px;
+    cursor: pointer;
+    opacity: 0.95;
+
+    &:hover {
+      opacity: 1.0;
+    }
+  }
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  background-image: url('../images/pixelator.png');
+  z-index: $zIndexSuperlays;
+}
+
+.dialog {
+  position: absolute;
+  background: #555;
+  padding: 25px 20px 20px 20px;
+  left: 50%;
+  margin-left: -(600px / 2);
+  width: 600px;
+  border-radius: 5px;
+  border: 1px solid #747474;
+  box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
+  top: -5px;
+  z-index: $zIndexSuperDuperlays;
+  background: linear-gradient(to bottom, rgb(69, 72, 77) 0%, rgb(30, 30, 30) 100%);
+
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .option {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.15);
+    background-image: url('../images/pixelator.png');
+    margin: 15px 0;
+    line-height: 16px;
+    cursor: pointer;
+
+    .flag {
+      height: 16px;
+      width: 24px;
+      margin-right: 10px;
+    }
+
+    &:hover {
+      border-color: #385aa3;
+    }
+  }
+
+  .button {
+    background: rgba(0, 0, 0, 0.5);
+    background-image: url('../images/pixelator.png');
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #333;
+    cursor: pointer;
+
+    &:hover {
+      border-color: #555;
+      background: rgba(0, 0, 0, 0.3);
+    }
   }
 }

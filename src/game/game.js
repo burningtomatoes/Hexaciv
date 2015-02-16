@@ -26,10 +26,12 @@ var Game = {
 
         Scoreboard.init();
 
+        Leaders.reset();
+
         this.initialized = true;
     },
 
-    start: function (cb) {
+    start: function (leaderId, cb) {
         if (cb == null) cb = function () { };
 
         if (!this.initialized) {
@@ -42,10 +44,10 @@ var Game = {
             return;
         }
 
-        this.started = true;
-
         Leaders.reset();
-        World.generate(21, 20);
+        World.generate(21, 20, leaderId);
+
+        this.started = true;
 
         var startComplete = function () {
             this.$element.show();

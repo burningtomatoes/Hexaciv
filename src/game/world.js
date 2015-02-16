@@ -37,7 +37,7 @@ var World = {
         this.turnLeader = null;
     },
 
-    generate: function (width, height) {
+    generate: function (width, height, playerLeaderId) {
         this.clear();
 
         var widthPx = width * this.hexSize.WIDTH;
@@ -72,12 +72,13 @@ var World = {
             y += this.hexSize.HEIGHT / 2;
         }
 
-        this.leaders = Leaders.selectRandomLeaders(5);
-
-        this.player = this.leaders[0];
+        this.player = Leaders.getLeader(playerLeaderId);
         this.player.isPlayer = true;
 
-        Scoreboard.updateUi();
+        this.leaders = [];
+        this.leaders.push(this.player);
+        this.leaders = this.leaders.concat(Leaders.selectRandomLeaders(4, playerLeaderId));
+        this.leaders = Utils.shuffleArray(this.leaders);
 
         Camera.centerToMap();
     },

@@ -25,16 +25,11 @@ var Scoreboard = {
         for (var i = 0; i < World.leaders.length; i++) {
             var leader = World.leaders[i];
 
-            if (!leader.isPlayer && !leader.revealed) {
-                continue;
-            }
-
             var $leader = $('<div />')
                 .addClass('leader')
                 .addClass(leader.isPlayer ? 'player' : 'ai')
                 .append('<img class="flag" src="assets/images/flag_' + leader.id + '.png" />')
-                .append(leader.title + ' ' + leader.name)
-                .appendTo(this.$scoreboard);
+                .append(leader.title + ' ' + leader.name);
 
             if (leader.isPlayer) {
                 this.$stats.find('.col.player').html($leader.html());
@@ -43,6 +38,12 @@ var Scoreboard = {
             if (leader.isPlaying()) {
                 $leader.addClass('playing');
             }
+
+            if (!leader.revealed) {
+                continue;
+            }
+
+            $leader.appendTo(this.$scoreboard);
         }
 
         this.$stats.find('.col.round').text(World.round > 0 ? 'Round ' + World.round : '');
