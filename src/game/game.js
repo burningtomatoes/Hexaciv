@@ -29,6 +29,11 @@ var Game = {
         Leaders.reset();
 
         this.initialized = true;
+
+        $('#endturn').click(function () {
+            World.endTurn();
+            $(this).hide();
+        });
     },
 
     start: function (leaderId, cb) {

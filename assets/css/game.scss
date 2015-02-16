@@ -270,3 +270,23 @@ canvas {
     }
   }
 }
+
+#endturn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: $zIndexOverlays;
+  font-size: 32px;
+  background: linear-gradient(to bottom, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 50%,rgba(248,181,0,1) 51%,rgba(251,223,147,1) 100%);
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000;
+  border-radius: 5px;
+  padding: 15px 17px 19px 17px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border: 1px solid #555;
+  cursor: pointer;
+  opacity: 0.95;
+
+  &:hover {
+    opacity: 1;
+  }
+}

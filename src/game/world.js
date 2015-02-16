@@ -116,6 +116,12 @@ var World = {
         }
 
         Scoreboard.updateUi();
+
+        if (this.turnLeader.isPlayer) {
+            $('#endturn').show();
+        } else {
+            $('#endturn').hide();
+        }
     },
 
     endTurn: function () {
