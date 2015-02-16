@@ -109,6 +109,10 @@ var World = {
             Notices.addNotice('Your turn begins.');
         } else {
             Notices.addNotice('Turn begins for ' + this.turnLeader.name + '.');
+
+            if (this.turnLeader.isPlayer && this.round == 1) {
+                Notices.addNotice('Choose a location for your first city.');
+            }
         }
 
         Scoreboard.updateUi();

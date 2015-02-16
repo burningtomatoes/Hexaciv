@@ -2,6 +2,10 @@ $(document).ready(function () {
     Game.init();
 
     Bootlogo.show(function () {
-        MainMenu.show();
+        if (Settings.DebugQuickPlay) {
+            Game.start(LeaderIds.NORTH_KOREA);
+        } else {
+            MainMenu.show();
+        }
     });
 });
