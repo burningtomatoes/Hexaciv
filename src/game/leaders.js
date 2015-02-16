@@ -4,6 +4,8 @@ var Leader = Class.extend({
     name: null,
     revealed: false,
     nation: null,
+    ai: null,
+    isPlayer: false,
 
     init: function (id, title, name, nation) {
         this.id = id;
@@ -11,6 +13,14 @@ var Leader = Class.extend({
         this.name = name;
         this.revealed = false;
         this.nation = nation;
+        this.ai = new Ai(this);
+        this.isPlayer = false;
+    },
+
+    update: function () {
+        if (!this.isPlayer) {
+            this.ai.update();
+        }
     },
 
     isPlaying: function () {

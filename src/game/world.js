@@ -124,6 +124,11 @@ var World = {
 
     update: function () {
         Camera.update();
+
+        for (var i = 0; i < this.leaders.length; i++) {
+            var leader = this.leaders[i];
+            leader.update();
+        }
     },
 
     draw: function (ctx) {
