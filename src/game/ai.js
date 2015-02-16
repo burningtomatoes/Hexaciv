@@ -9,12 +9,30 @@ var Ai = Class.extend({
         return World.turnLeader === this.leader;
     },
 
-    update: function () {
+    thoughtDelayer: 0,
 
+    update: function () {
         if (!this.isPlaying()) {
             return;
         }
-        console.log('thinks');
+
+        if (this.thoughtDelayer == 0) {
+            this.thoughtDelayer = chance.integer({
+                min: 30,
+                max: 100
+            })
+        }
+
+        if (this.thoughtDelayer > 0) {
+            this.thoughtDelayer--;
+        }
+
+        if (this.thoughtDelayer == 0) {
+            this.think();
+        }
+    },
+
+    think: function () {
         World.endTurn();
     }
 });
