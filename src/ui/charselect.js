@@ -27,6 +27,10 @@ var CharSelect = {
                 .append('<img src="assets/images/flag_' + leader.id + '.png" class="flag" />')
                 .append(leader.title + ' ' + leader.name + ' of ' + leader.nation)
                 .click(function() {
+                    if (!this.showing) {
+                        return;
+                    }
+
                     MainMenu.hide();
                     this.hide();
                     Game.start(leader.id);
