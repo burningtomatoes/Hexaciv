@@ -79,7 +79,12 @@ var Hex = Class.extend({
         ctx.stroke();
 
         if (this.isActive) {
-            ctx.fillStyle = 'rgba(100, 50, 255, 0.25)';
+            if (this.landType == LandType.WATER) {
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.4)';
+            } else {
+                ctx.fillStyle = 'rgba(100, 50, 255, 0.4)';
+            }
+
             ctx.fill();
         }
     },
