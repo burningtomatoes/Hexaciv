@@ -6,6 +6,10 @@ var Utils = {
         r2.bottom < r1.top);
     },
 
+    isInRect: function (x, y, rect) {
+        return rect.left < x && rect.right > x && rect.top < y && rect.bottom > y;
+    },
+
     generateGuid: function () {
         var guid = (function() {
             function s4() {
