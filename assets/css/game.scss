@@ -125,7 +125,6 @@ canvas {
 
     &.playing {
       background: rgba(22, 82, 255, 0.75);
-      margin-top: 0;
     }
 
     img.flag {
@@ -288,5 +287,24 @@ canvas {
 
   &:hover {
     opacity: 1;
+  }
+}
+
+#tutorial {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 5px;
+  bottom: 50px + 10px;
+  padding: 15px;
+  z-index: $zIndexOverlays;
+
+  h4 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    clear: both;
+  }
+
+  p {
+    font-size: 14px;
   }
 }
