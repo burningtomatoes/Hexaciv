@@ -7,17 +7,32 @@ var Hex = Class.extend({
 
     points: [],
 
+    owner: null,
+
+    entities: [],
+
+    isActive: false,
+
     init: function (id, x, y) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.landType = x % 3 ? LandType.SAND : LandType.GRASS;
+        this.owner = null;
 
         if (x == 0 || y == 0 || y == World.hexSize.HEIGHT / 2 || x == World.hexSize.WIDTH) {
             this.landType = LandType.WATER;
         }
 
         this.preparePoints();
+
+        this.entities = [];
+
+        this.isActive = false;
+    },
+
+    add: function (e) {
+        this.entities.push(e);
     },
 
     preparePoints: function () {
@@ -32,6 +47,13 @@ var Hex = Class.extend({
         this.points.push(new Point(x1 + World.hexSize.SIDE + this.x, World.hexSize.HEIGHT + this.y));
         this.points.push(new Point(x1 + this.x, World.hexSize.HEIGHT + this.y));
         this.points.push(new Point(this.x, y1 + this.y));
+    },
+
+    update: function () {
+        for (var i = 0; i < this.entities.length; i++) {
+            var e = this.entities[i];
+            e.update();
+        }
     },
 
     draw: function (ctx) {
@@ -55,5 +77,21 @@ var Hex = Class.extend({
 
         ctx.closePath();
         ctx.stroke();
+
+        if (this.isActive) {
+            ctx.fillStyle = 'rgba(100, 50, 255, 0.25)';
+            ctx.fill();
+        }
+    },
+
+    rect: function () {
+        var r = { };
+        r.left = this.x;
+        r.top = this.y;
+        r.width = World.hexSize.WIDTH;
+        r.height = World.hexSize.HEIGHT;
+        r.right = r.left + r.width;
+        r.bottom = r.top + r.height;
+        return r;
     }
 });

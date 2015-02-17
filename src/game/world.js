@@ -105,14 +105,16 @@ var World = {
         this.turnLeader = this.leaders[this.turn];
         this.turnLeader.revealed = true;
 
+        Tutorial.hide();
+
         if (this.turnLeader === this.player) {
             Notices.addNotice('Your turn begins.');
+
+            if (this.round == 1) {
+                Tutorial.show('Settle your capital', 'Select a strategic hex to settle your first city.');
+            }
         } else {
             Notices.addNotice('Turn begins for ' + this.turnLeader.name + '.');
-
-            if (this.turnLeader.isPlayer && this.round == 1) {
-                Notices.addNotice('Choose a location for your first city.');
-            }
         }
 
         Scoreboard.updateUi();
@@ -134,6 +136,25 @@ var World = {
         for (var i = 0; i < this.leaders.length; i++) {
             var leader = this.leaders[i];
             leader.update();
+        }
+
+        var foundActive = false;
+
+        var mouseX = Mouse.scaledX - Camera.translateX(0);
+        var mouseY = Mouse.scaledY - Camera.translateY(0);
+
+        for (var i = 0; i < this.hexCount; i++) {
+            var hex = this.hexes[i];
+            hex.update();
+
+            var rect = hex.rect();
+
+            if (Utils.isInRect(mouseX, mouseY, rect) && !foundActive) {
+                hex.isActive = true;
+                foundActive = true;
+            } else {
+                hex.isActive = false;
+            }
         }
     },
 

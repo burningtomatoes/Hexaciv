@@ -2,6 +2,9 @@ var Mouse = {
     posX: 0,
     posY: 0,
 
+    scaledX: 0,
+    scaledY: 0,
+
     wasSet: false,
 
     imgDefault: null,
@@ -15,6 +18,8 @@ var Mouse = {
         $('body').mousemove(function (e) {
             this.posX = e.pageX;
             this.posY = e.pageY;
+            this.scaledX = Math.round(this.posX / Canvas.upscaleRatio);
+            this.scaledY = Math.round(this.posY / Canvas.upscaleRatio);
             this.wasSet = true;
         }.bind(this));
 
@@ -26,6 +31,6 @@ var Mouse = {
             return;
         }
 
-        ctx.drawImage(this.imgDefault, 0, 0, this.w, this.h, Math.round(this.posX / Canvas.upscaleRatio), Math.round(this.posY / Canvas.upscaleRatio), this.w, this.h);
+        ctx.drawImage(this.imgDefault, 0, 0, this.w, this.h, this.scaledX, this.scaledY, this.w, this.h);
     }
 };
