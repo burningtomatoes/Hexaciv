@@ -234,7 +234,9 @@ var World = {
             if (hex.owner != null) {
                 Notices.addNotice('You can only deploy cities in neutral hexes.');
             } else if (hex.entities.length != 0) {
-                Notices.addNotice('You can only deploy cities in empty hexes.')
+                Notices.addNotice('You can only deploy cities in empty hexes.');
+            } else if (hex.landType == LandType.WATER) {
+                Notices.addNotice('You cannot build cities on water.');
             } else {
                 hex.add(new City(this.turnLeader));
                 this.endTurn();
