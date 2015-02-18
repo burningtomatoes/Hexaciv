@@ -42,12 +42,9 @@ var Ai = Class.extend({
             var hex = World.getHex(randId);
 
             if (hex != null && hex.landType != LandType.WATER && hex.owner == null && hex.entities.length == 0) {
-                console.log(hex);
                 hex.add(new City(this.leader));
                 World.endTurn();
                 return;
-            } else {
-                console.log('not suitable', hex);
             }
         } else {
             // Have nothing left to do
