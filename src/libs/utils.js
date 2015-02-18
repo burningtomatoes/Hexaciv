@@ -46,5 +46,13 @@ var Utils = {
             g: parseInt(result[2], 16),
             b: parseInt(result[3], 16)
         } : null;
+    },
+
+    hexDistance: function (h1, h2) {
+        //a good explanation of this calc can be found here:
+        //http://playtechs.blogspot.com/2007/04/hex-grids.html
+        var deltaX = h1.pCoordX - h2.pCoordX;
+        var deltaY = h1.pCoordY - h2.pCoordY;
+        return ((Math.abs(deltaX) + Math.abs(deltaY) + Math.abs(deltaX - deltaY)) / 2);
     }
 };

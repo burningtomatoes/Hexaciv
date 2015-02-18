@@ -13,6 +13,9 @@ var Hex = Class.extend({
 
     isActive: false,
 
+    pCoordX: 0,
+    pCoordY: 0,
+
     init: function (id, x, y) {
         this.id = id;
         this.x = x;
@@ -29,6 +32,23 @@ var Hex = Class.extend({
         this.entities = [];
 
         this.isActive = false;
+
+        this.pCoordX = 0;
+        this.pCoordY = 0;
+    },
+
+    getSurroundingHexes: function (range) {
+        var hexes = [];
+
+        for (var i = 0; i < World.hexCount; i++) {
+            var hex = World.hexes[i];
+
+            if (Utils.hexDistance(this, hex) <= range) {
+                hexes.push(hex);
+            }
+        }
+
+        return hexes;
     },
 
     add: function (e) {
@@ -86,12 +106,13 @@ var Hex = Class.extend({
 
         // Draw hexagon path
         if (this.borderColor != null) {
-            ctx.strokeStyle = 'rgba(' + this.borderColor.r + ', ' + this.borderColor.g + ', ' + this.borderColor.b + ', 0.75)';
+            ctx.strokeStyle = 'rgba(' + this.borderColor.r + ', ' + this.borderColor.g + ', ' + this.borderColor.b + ', 1)';
+            ctx.lineWidth = 2;
         } else {
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+            ctx.lineWidth = 1;
         }
 
-        ctx.lineWidth = 1;
         ctx.beginPath();
 
         for (var i = 0; i < 6; i++) {
@@ -114,6 +135,9 @@ var Hex = Class.extend({
                 ctx.fillStyle = 'rgba(100, 50, 255, 0.4)';
             }
 
+            ctx.fill();
+        } else if (this.borderColor != null) {
+            ctx.fillStyle = 'rgba(' + this.borderColor.r + ', ' + this.borderColor.g + ', ' + this.borderColor.b + ', 0.25)';
             ctx.fill();
         }
 

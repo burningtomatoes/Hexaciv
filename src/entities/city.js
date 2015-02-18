@@ -15,6 +15,14 @@ var City = Entity.extend({
 
     onDeploy: function () {
         Notices.addNotice(this.owner.name + ' has founded ' + this.name + '!');
+
+        var borders = this.hex.getSurroundingHexes(1);
+
+        for (var i = 0; i < borders.length; i++) {
+            var hex = borders[i];
+            hex.setOwner(this.owner);
+            console.log('I own ' + hex.id);
+        }
     },
 
     draw: function (ctx) {

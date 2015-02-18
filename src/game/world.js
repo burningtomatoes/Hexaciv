@@ -6,6 +6,7 @@ var LandType = {
 
 var World = {
     hexes: [],
+    hexesByCoord: {},
     hexCount: 0,
 
     hexSize: {
@@ -31,6 +32,7 @@ var World = {
 
     clear: function () {
         this.hexes = [];
+        this.hexesByCoord = { };
         this.hexCount = 0;
         this.width = 0;
         this.height = 0;
@@ -82,7 +84,14 @@ var World = {
 
             while (x + this.hexSize.WIDTH <= widthPx) {
                 var hex = new Hex(this.hexCount++, x, y);
+                hex.pCoordX = col;
                 this.hexes.push(hex);
+
+                if (!this.hexesByCoord[hex.pCoordX]) {
+                    this.hexesByCoord[hex.pCoordX] = [];
+                }
+
+                this.hexesByCoord[hex.pCoordX].push(hex);
 
                 col += 2;
                 x += this.hexSize.WIDTH + this.hexSize.SIDE;
@@ -90,6 +99,16 @@ var World = {
 
             row++;
             y += this.hexSize.HEIGHT / 2;
+        }
+
+        for (var pCoordX in this.hexesByCoord) {
+            var hexesByCoord = this.hexesByCoord[pCoordX];
+            var pCoordY = Math.floor(pCoordX / 2) + (pCoordX % 2);
+
+            for (var i in hexesByCoord) {
+                var h = hexesByCoord[i];
+                h.pCoordY = pCoordY++;
+            }
         }
 
         this.player = Leaders.getLeader(playerLeaderId);
