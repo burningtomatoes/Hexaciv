@@ -1,4 +1,4 @@
 var Settings = {
-    DebugSkipBootLogo: true,
-    DebugQuickPlay: true
+    DebugSkipBootLogo: false,
+    DebugQuickPlay: false
 };

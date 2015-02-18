@@ -174,6 +174,7 @@ var World = {
                 Tutorial.show('Expand your borders', 'Send your unit out to capture hexes.');
             } else if (this.round == 3) {
                 Tutorial.show('Grow your city', 'Each hex you own accelerates your city\'s growth.');
+                EpicFail.show();
             } else if (this.round == 4) {
                 Tutorial.show('Build units', 'The more citizens you have, the faster you gain new units.');
             } else if (this.round == 5) {
