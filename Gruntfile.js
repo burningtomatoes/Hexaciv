@@ -7,8 +7,7 @@ module.exports = function(grunt) {
             },
             build: {
                 src: ['src/settings.js', 'src/libs/inherit.js', 'src/game/loaders/loader.js',
-                    'src/game/entities/entity.js', 'src/graphics/renderers/renderer.js',
-                    'src/game/entities/fighters/fighter.entity.js', 'src/**/*.js'],
+                    'src/entities/entity.js', 'src/**/*.js'],
                 dest: 'build/<%= pkg.name %>.min.js'
             }
         }

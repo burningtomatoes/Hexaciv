@@ -12,6 +12,9 @@ var Mouse = {
     w: 16,
     h: 16,
 
+    lastMouseDown: 0,
+    mouseDown: 0,
+
     init: function () {
         this.wasSet = false;
 
@@ -23,7 +26,31 @@ var Mouse = {
             this.wasSet = true;
         }.bind(this));
 
+        document.body.onmousedown = function() {
+            this.mouseDown++;
+        }.bind(this);
+
+        document.body.onmouseup = function() {
+            this.mouseDown--;
+        }.bind(this);
+
         this.imgDefault = Game.images.load('cursor_default.png');
+    },
+
+    update: function () {
+        this.lastMouseDown = this.mouseDown;
+    },
+
+    didClick: function () {
+        return !this.wasMouseDown() && this.isMouseDown();
+    },
+
+    isMouseDown: function () {
+        return this.mouseDown > 0;
+    },
+
+    wasMouseDown: function () {
+        return this.lastMouseDown > 0;
     },
 
     draw: function (ctx) {

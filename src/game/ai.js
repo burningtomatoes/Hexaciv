@@ -33,6 +33,25 @@ var Ai = Class.extend({
     },
 
     think: function () {
-        World.endTurn();
+        if (World.deployMode) {
+            // Need to deploy a city
+            var randId = chance.integer({
+                min: 0,
+                max: World.hexCount
+            });
+            var hex = World.getHex(randId);
+
+            if (hex != null && hex.landType != LandType.WATER && hex.owner == null && hex.entities.length == 0) {
+                console.log(hex);
+                hex.add(new City(this.leader));
+                World.endTurn();
+                return;
+            } else {
+                console.log('not suitable', hex);
+            }
+        } else {
+            // Have nothing left to do
+            World.endTurn();
+        }
     }
 });

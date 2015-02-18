@@ -6,8 +6,9 @@ var Leader = Class.extend({
     nation: null,
     ai: null,
     isPlayer: false,
+    color: 'red',
 
-    init: function (id, title, name, nation) {
+    init: function (id, title, name, nation, color) {
         this.id = id;
         this.title = title;
         this.name = name;
@@ -15,6 +16,7 @@ var Leader = Class.extend({
         this.nation = nation;
         this.ai = new Ai(this);
         this.isPlayer = false;
+        this.color = color;
     },
 
     update: function () {
@@ -48,13 +50,13 @@ var Leaders = {
 
     reset: function () {
         this.leaders = [
-            new Leader(LeaderIds.NETHERLANDS,              'King',                 'Willie',        'The Netherlands'),
-            new Leader(LeaderIds.UNITED_STATES_AMERICA,    'President',            'Obama',         'The United States'),
-            new Leader(LeaderIds.ENGLAND,                  'Queen',                'Elizabeth II',  'The United Kingdom'),
-            new Leader(LeaderIds.NORTH_KOREA,              'Supreme Leader',       'Jong-un',       'North Korea'),
-            new Leader(LeaderIds.CHINA,                    'President',            'Jinping',       'China'),
-            new Leader(LeaderIds.RUSSIA,                   'President',            'Putin',         'Russia'),
-            new Leader(LeaderIds.GERMANY,                  'Chancellor',           'Merkel',        'Germany')
+            new Leader(LeaderIds.NETHERLANDS,              'King',                 'Willie',        'The Netherlands',          '#FF8000'),
+            new Leader(LeaderIds.UNITED_STATES_AMERICA,    'President',            'Obama',         'The United States',        '#0039A6'),
+            new Leader(LeaderIds.ENGLAND,                  'Queen',                'Elizabeth II',  'The United Kingdom',       '#DF0101'),
+            new Leader(LeaderIds.NORTH_KOREA,              'Supreme Leader',       'Kim Jong-un',   'North Korea',              '#014FA2'),
+            new Leader(LeaderIds.CHINA,                    'President',            'Xi Jinping',    'China',                    '#FEDB00'),
+            new Leader(LeaderIds.RUSSIA,                   'President',            'Putin',         'Russia',                   '#FFFFFF'),
+            new Leader(LeaderIds.GERMANY,                  'Chancellor',           'Merkel',        'Germany',                  '#aaaaaa')
         ];
     },
 

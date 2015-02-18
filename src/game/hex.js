@@ -32,7 +32,16 @@ var Hex = Class.extend({
     },
 
     add: function (e) {
+        e.hex = this;
+
+        if (this.owner == null && e.owner != null) {
+            this.owner = e.owner;
+        } else if (this.owner != null && e.owner == null) {
+            e.owner = this.owner;
+        }
+
         this.entities.push(e);
+        e.onDeploy();
     },
 
     preparePoints: function () {
@@ -86,6 +95,11 @@ var Hex = Class.extend({
             }
 
             ctx.fill();
+        }
+
+        for (var i = 0; i < this.entities.length; i++) {
+            var e = this.entities[i];
+            e.draw(ctx);
         }
     },
 

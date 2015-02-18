@@ -100,8 +100,10 @@ var Game = {
             return;
         }
 
-        Keyboard.update();
         World.update();
+
+        Keyboard.update();
+        Mouse.update();
     },
 
     draw: function (ctx) {

@@ -14,6 +14,9 @@ var World = {
         SIDE: 35
     },
 
+    width: 0,
+    height: 0,
+
     widthPx: 0,
     heightPx: 0,
 
@@ -24,10 +27,13 @@ var World = {
     round: 0,
     turn: 0,
     turnLeader: null,
+    deployMode: false,
 
     clear: function () {
         this.hexes = [];
         this.hexCount = 0;
+        this.width = 0;
+        this.height = 0;
         this.widthPx = 0;
         this.heightPx = 0;
         this.leaders = [];
@@ -35,10 +41,24 @@ var World = {
         this.round = 0;
         this.turn = 0;
         this.turnLeader = null;
+        this.deployMode = false;
+    },
+
+    getHex: function (id) {
+        for (var i = 0; i < this.hexCount; i++) {
+            var hex = this.hexes[i];
+            if (hex.id == id) {
+                return hex;
+            }
+        }
+        return null;
     },
 
     generate: function (width, height, playerLeaderId) {
         this.clear();
+
+        this.width = width;
+        this.height = height;
 
         var widthPx = width * this.hexSize.WIDTH;
         var heightPx = height * this.hexSize.HEIGHT;
@@ -105,6 +125,12 @@ var World = {
         this.turnLeader = this.leaders[this.turn];
         this.turnLeader.revealed = true;
 
+        this.deployMode = false;
+
+        if (this.round == 1) {
+            this.deployMode = true;
+        }
+
         Tutorial.hide();
 
         if (this.turnLeader === this.player) {
@@ -119,7 +145,7 @@ var World = {
 
         Scoreboard.updateUi();
 
-        if (this.turnLeader.isPlayer) {
+        if (this.turnLeader.isPlayer && !this.deployMode) {
             $('#endturn').show();
         } else {
             $('#endturn').hide();
@@ -149,12 +175,31 @@ var World = {
 
             var rect = hex.rect();
 
-            if (Utils.isInRect(mouseX, mouseY, rect) && !foundActive) {
+            if (this.turnLeader != null && this.turnLeader.isPlayer && Utils.isInRect(mouseX, mouseY, rect) && !foundActive) {
                 hex.isActive = true;
                 foundActive = true;
+
+                if (Mouse.didClick()) {
+                    this.onClick(hex);
+                }
             } else {
                 hex.isActive = false;
             }
+        }
+    },
+
+    onClick: function (hex) {
+        if (this.deployMode) {
+            if (hex.owner != null) {
+                Notices.addNotice('You can only deploy cities in neutral hexes.');
+            } else if (hex.entities.length != 0) {
+                Notices.addNotice('You can only deploy cities in empty hexes.')
+            } else {
+                hex.add(new City(this.turnLeader));
+                this.endTurn();
+            }
+
+            return;
         }
     },
 
