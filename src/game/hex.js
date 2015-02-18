@@ -35,13 +35,18 @@ var Hex = Class.extend({
         e.hex = this;
 
         if (this.owner == null && e.owner != null) {
-            this.owner = e.owner;
+            this.setOwner(e.owner);
         } else if (this.owner != null && e.owner == null) {
             e.owner = this.owner;
         }
 
         this.entities.push(e);
         e.onDeploy();
+    },
+
+    setOwner: function (owner) {
+        this.owner = owner;
+        this.determineBorderColor();
     },
 
     preparePoints: function () {
@@ -65,12 +70,27 @@ var Hex = Class.extend({
         }
     },
 
+    borderColor: null,
+
+    determineBorderColor: function () {
+        if (this.owner != null) {
+            this.borderColor = Utils.hexToRgb(this.owner.color);
+        } else {
+            this.borderColor = null;
+        }
+    },
+
     draw: function (ctx) {
         // Draw hexagon land type
         ctx.drawImage(Game.images.load('hex_' + this.landType + '.png'), 0, 0, World.hexSize.WIDTH, World.hexSize.HEIGHT, this.x, this.y, World.hexSize.WIDTH, World.hexSize.HEIGHT);
 
         // Draw hexagon path
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+        if (this.borderColor != null) {
+            ctx.strokeStyle = 'rgba(' + this.borderColor.r + ', ' + this.borderColor.g + ', ' + this.borderColor.b + ', 0.75)';
+        } else {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+        }
+
         ctx.lineWidth = 1;
         ctx.beginPath();
 
