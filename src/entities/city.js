@@ -24,7 +24,6 @@ var City = Entity.extend({
         for (var i = 0; i < borders.length; i++) {
             var hex = borders[i];
             hex.setOwner(this.owner);
-            console.log('I own ' + hex.id);
         }
     },
 

@@ -19,6 +19,22 @@ var Leader = Class.extend({
         this.color = color;
     },
 
+    getCity: function () {
+        for (var i = 0; i < World.hexes.length; i++) {
+            var hex = World.hexes[i];
+
+            for (var j = 0; j < hex.entities.length; j++) {
+                var entity = hex.entities[j];
+
+                if (entity.isCity && entity.owner === this) {
+                    return entity;
+                }
+            }
+        }
+
+        return null;
+    },
+
     update: function () {
         if (!this.isPlayer) {
             this.ai.update();
