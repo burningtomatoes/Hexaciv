@@ -2,6 +2,8 @@ var City = Entity.extend({
     img: null,
     imgFlag: null,
     name: null,
+    citizens: 1,
+    isCity: true,
 
     init: function (owner) {
         this._super();
@@ -11,6 +13,7 @@ var City = Entity.extend({
         this.img = Game.images.load('hex_city.png');
         this.imgFlag = Game.images.load('flag_' + this.owner.id + '.png');
         this.name = chance.city();
+        this.citizens = 1;
     },
 
     onDeploy: function () {
@@ -52,8 +55,28 @@ var City = Entity.extend({
             var x = this.hex.x;
             var y = this.hex.y;
 
+            ctx.font = '8px pixelmix';
+
+            var txt = this.citizens.toString();
+            var textSize = ctx.measureText(txt);
+
+            x += (World.hexSize.WIDTH / 2) - (textSize.width / 2);
+            y += 20;
+
+            x = Math.round(x);
+            y = Math.round(y);
+
+            ctx.fillStyle = '#000';
+            ctx.fillText(txt, x + 1, y + 1);
+            ctx.fillStyle = '#fff';
+            ctx.fillText(txt, x, y);
+        }
+        {
+            var x = this.hex.x;
+            var y = this.hex.y;
+
             x += (World.hexSize.WIDTH / 2) - (20 / 2);
-            y += 25;
+            y += 30;
 
             x = Math.round(x);
             y = Math.round(y);

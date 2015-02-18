@@ -128,6 +128,18 @@ var World = {
 
         Notices.addNotice('Round ' + this.round + ' begins.');
 
+        for (var i = 0; i < this.hexes.length; i++) {
+            var hex = this.hexes[i];
+
+            for (var j = 0; j < hex.entities.length; j++) {
+                var entity = hex.entities[j];
+
+                if (entity.isCity) {
+                    entity.citizens += entity.owner.getBorderCount();
+                }
+            }
+        }
+
         this.turn = -1;
         this.beginTurn();
     },
@@ -157,6 +169,16 @@ var World = {
 
             if (this.round == 1) {
                 Tutorial.show('Settle your capital', 'Select a strategic hex to settle your first city.');
+            } else if (this.round == 2) {
+                Tutorial.show('Expand your borders', 'Send your unit out to capture hexes.');
+            } else if (this.round == 3) {
+                Tutorial.show('Grow your city', 'Each hex you own accelerates your city\'s growth.');
+            } else if (this.round == 4) {
+                Tutorial.show('Build units', 'The more citizens you have, the faster you gain new units.');
+            } else if (this.round == 5) {
+                Tutorial.show('Dominate', 'Defend your cities, and use your units to attack others. Last man standing wins.');
+            } else if (this.round == 100) {
+                Tutorial.show('Wow', 'You are amazing. You have made it to turn 100!');
             }
         } else {
             Notices.addNotice('Turn begins for ' + this.turnLeader.name + '.');

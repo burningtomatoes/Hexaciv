@@ -25,6 +25,20 @@ var Leader = Class.extend({
         }
     },
 
+    getBorderCount: function () {
+        var cnt = 0;
+
+        for (var i = 0; i < World.hexes.length; i++) {
+            var hex = World.hexes[i];
+
+            if (hex.owner === this) {
+                cnt++;
+            }
+        }
+
+        return cnt;
+    },
+
     isPlaying: function () {
         return World.turnLeader === this;
     }
