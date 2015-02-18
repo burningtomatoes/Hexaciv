@@ -2,6 +2,20 @@ Hexaciv
 =======
 *Civilize the world and fight your way to domination!*
 
+About this game
+---
+Play against other world leaders in this hex-based strategy game.
+
+Disclaimer: *This game is very unfinished, I ran out of time. It is basically unplayable. Sorry about that.*
+
+**How to play**:
+
+- Settle your city
+- Move units to hexes to capture them
+- The more hexes your civ owns, the faster your city grows
+- The faster the city grows, the more units you have
+- Defend your city, and capture other cities
+
 About the challenge
 ---
 I built this game as part of my "build one game a week" challenge: one game per week, every week, even if it's crap (release often, fail often, and learn). I'm hoping to get better at game development during this process by pushing myself to deliver something every week and learning from previous weeks. Hopefully by releasing the source code to each game, my journey can be useful to you too.
