@@ -4,6 +4,7 @@ var City = Entity.extend({
     name: null,
     citizens: 1,
     isCity: true,
+    unitCountdown: 0,
 
     init: function (owner) {
         this._super();
@@ -14,6 +15,7 @@ var City = Entity.extend({
         this.imgFlag = Game.images.load('flag_' + this.owner.id + '.png');
         this.name = chance.city();
         this.citizens = 1;
+        this.unitCountdown = 0;
     },
 
     onDeploy: function () {
@@ -24,6 +26,16 @@ var City = Entity.extend({
         for (var i = 0; i < borders.length; i++) {
             var hex = borders[i];
             hex.setOwner(this.owner);
+        }
+    },
+
+    checkUnits: function () {
+        this.unitCountdown -= this.citizens;
+
+        if (this.unitCountdown <= 0) {
+            Notices.addNotice(this.owner.name + ' has received a new unit.');
+            this.hex.add(new Unit(this.owner));
+            this.unitCountdown = 100;
         }
     },
 

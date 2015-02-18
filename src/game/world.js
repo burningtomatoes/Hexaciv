@@ -136,6 +136,7 @@ var World = {
 
                 if (entity.isCity) {
                     entity.citizens += entity.owner.getBorderCount();
+                    entity.checkUnits();
                 }
             }
         }
